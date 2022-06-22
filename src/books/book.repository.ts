@@ -1,4 +1,4 @@
-import { CustomRepository } from "src/configs/typeorm-ex/typeorm-ex.decorator";
+import { CustomRepository } from "src/db/typeorm-ex.decorator";
 import { Repository } from "typeorm";
 import { Book } from "./book.entity";
 import { CreateBookDto } from "./dto/create-book.dto";
