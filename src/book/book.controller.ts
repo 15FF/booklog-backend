@@ -14,7 +14,7 @@ export class BookController {
   }
 
   @Get()
-  getBooks(@Query('searchValue') searchValue: string) {
-    return this.booksService.getBooks(searchValue);
+  getBooks(@Query('bookQuery') bookQuery: string) {
+    return this.booksService.getBooks(bookQuery);
   }
 }
