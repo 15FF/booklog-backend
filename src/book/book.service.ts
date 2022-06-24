@@ -12,7 +12,7 @@ export class BookService {
   ) {}
 
   createBook(createBookDto: CreateBookDto): Promise<Book> {
-    return this.bookRepository.createBook(createBookDto);
+    return this.bookRepository.save(createBookDto.toEntity());
   }
 
   getBooks(bookQuery: string) {
