@@ -17,4 +17,13 @@ export class Book extends BaseEntity {
 
   @Column()
   publisher: string;
+
+  static from(title: string, author: string, category: string, publisher: string): Book {
+    const book = new Book()
+    book.title = title;
+    book.author = author;
+    book.category = category;
+    book.publisher = publisher;
+    return book;
+  }
 }

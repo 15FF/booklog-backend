@@ -8,7 +8,7 @@ export class BookController {
   constructor(private booksService: BookService) {}
   
   @Post()
-  @UsePipes(ValidationPipe)
+  @UsePipes(new ValidationPipe({ transform: true }))
   createBook(@Body() createBookDto: CreateBookDto): Promise<Book> {
     return this.booksService.createBook(createBookDto);
   }

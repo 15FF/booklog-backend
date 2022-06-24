@@ -1,4 +1,5 @@
 import { IsNotEmpty } from "class-validator";
+import { Book } from "../book.entity";
 
 export class CreateBookDto {
   @IsNotEmpty()
@@ -12,4 +13,8 @@ export class CreateBookDto {
 
   @IsNotEmpty()
   publisher: string;
+
+  toEntity(): Book {
+    return Book.from(this.title, this.author, this.category, this.publisher);
+  }
 }
