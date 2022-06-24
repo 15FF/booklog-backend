@@ -5,6 +5,7 @@ import { BookSearchService } from './book-search.service';
 import { BookController } from './book.controller';
 import { BookRepository } from './book.repository';
 import { BookService } from './book.service';
+import { ApiResultCoverter } from './helper/api-result.converter';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import { BookService } from './book.service';
     HttpModule
   ],
   controllers: [BookController],
-  providers: [BookService, BookSearchService]
+  providers: [BookService, BookSearchService, ApiResultCoverter]
 })
 export class BooksModule {}
