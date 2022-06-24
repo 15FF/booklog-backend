@@ -21,7 +21,7 @@ export class BookSearchService {
     const params = { query: bookQuery };
     
     const searchResult = await firstValueFrom(this.httpService.get(this.URL, { params, headers: this.API_KEY }));
-    const bookInfoDtos = this.apiResultCoverter.toBookInfoDtos(searchResult);
+    const bookInfoDtos = this.apiResultCoverter.toBookInfoDtos(searchResult.data);
     const responseBookListDto = new ResponseBookListDto(bookInfoDtos.length, bookInfoDtos);
     return responseBookListDto;
   }

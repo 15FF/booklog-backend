@@ -7,10 +7,10 @@ export class ApiResultCoverter {
   // API의 반환 값이 query와 일치하는 값을 HTML 태그로 감싸기 때문에 정규표현식을 이용하여 태그 제거
   private readonly REGEXP: RegExp = /<[^>]*>?/g;
   private readonly PATTERN: DateTimeFormatter = DateTimeFormatter.ofPattern('yyyyMMdd');
-  private readonly PADDING = '19000101';
+  private readonly PADDING = '0101';
 
   public toBookInfoDtos(searchResult: any): BookInfoDto[] {
-    const bookInfoDtos: BookInfoDto[] = searchResult.data.items.map(bookInfo =>
+    const bookInfoDtos: BookInfoDto[] = searchResult.items.map(bookInfo =>
       new BookInfoDto(
         bookInfo.title.replace(this.REGEXP, ''),
         bookInfo.image,
@@ -27,8 +27,8 @@ export class ApiResultCoverter {
 
   private stringToLocalDate(pubdate: string): LocalDate {
     const localDate: LocalDate = LocalDate.parse(
-      // API의 pubdate 반환 값이 4자리인 경우가 존재함으로 패딩 추가
-      pubdate.padEnd(this.PADDING.length, this.PADDING), 
+      // API의 pubdate 반환 값이 4자리인 경우가 존재함으로 8자가 되도록 패딩 추가
+      pubdate.padEnd(8, this.PADDING), 
       this.PATTERN
     );
     return localDate;
