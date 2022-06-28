@@ -1,9 +1,9 @@
 import { LocalDate } from "@js-joda/core";
-import { BookInfoDto } from "src/book/dto/book-info.dto";
-import { ApiResultCoverter } from "src/book/helper/api-result.converter";
+import { BookInfoDto } from "src/book/dto/BookInfoDto";
+import { ApiResultTransformer } from "src/book/transformer/ApiResultTransformer";
 
 describe('[ApiResultCoverter]', () => {
-  const apiResultCoverter: ApiResultCoverter = new ApiResultCoverter();
+  const apiResultCoverter: ApiResultTransformer = new ApiResultTransformer();
 
   it('Naver Search API 반환 결과를 bookInfoDto 배열로 변환한다', () => {
     // given

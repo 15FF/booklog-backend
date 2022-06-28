@@ -1,8 +1,8 @@
 import { HttpService } from "@nestjs/axios";
 import { Injectable } from "@nestjs/common";
 import { firstValueFrom } from "rxjs";
-import { ResponseBookListDto } from "./dto/response-book-list.dto";
-import { ApiResultCoverter } from "./helper/api-result.converter";
+import { ResponseBookListDto } from "./dto/ResponseBookListDto";
+import { ApiResultTransformer } from "./transformer/ApiResultTransformer";
 
 @Injectable()
 export class BookSearchService {
@@ -14,7 +14,7 @@ export class BookSearchService {
   
   constructor (
       private readonly httpService: HttpService,
-      private readonly apiResultCoverter: ApiResultCoverter
+      private readonly apiResultCoverter: ApiResultTransformer
   ) {}
     
   public async callBookApi(bookQuery: string): Promise<ResponseBookListDto> {

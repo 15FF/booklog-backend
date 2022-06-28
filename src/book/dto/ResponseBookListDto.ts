@@ -1,4 +1,4 @@
-import { BookInfoDto } from "./book-info.dto";
+import { BookInfoDto } from "./BookInfoDto";
 
 export class ResponseBookListDto {
   count: number;

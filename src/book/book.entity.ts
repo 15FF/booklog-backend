@@ -1,12 +1,10 @@
 import { LocalDate } from "@js-joda/core";
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseTimeEntity } from "src/db/time/BaseTimeEntity";
+import { LocalDateTransformer } from "src/db/time/transformer/LocalDateTransformer";
+import { Column, Entity } from "typeorm";
 
 @Entity()
-export class Book extends BaseEntity {
-
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Book extends BaseTimeEntity {
   @Column()
   title: string;
 
@@ -19,9 +17,12 @@ export class Book extends BaseEntity {
   @Column()
   isbn: string;
 
-  @Column()
+  @Column({
+    type: 'timestamp',
+    transformer: new LocalDateTransformer(),
+  })
   pubdate: LocalDate;
-
+  
   static from(title: string, author: string, publisher: string, isbn: string, pubdate: LocalDate): Book {
     const book = new Book()
     book.title = title;

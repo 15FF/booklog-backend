@@ -1,6 +1,6 @@
-import { CustomRepository } from "src/db/typeorm-ex.decorator";
+import { CustomRepository } from "src/db/TypeOrmExDecorator";
 import { Repository } from "typeorm";
-import { Book } from "./book.entity";
+import { Book } from "./Book.entity";
 
 @CustomRepository(Book)
 export class BookRepository extends Repository<Book> {

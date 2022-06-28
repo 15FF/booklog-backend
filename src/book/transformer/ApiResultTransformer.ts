@@ -1,9 +1,9 @@
 import { DateTimeFormatter, LocalDate } from "@js-joda/core";
 import { Injectable } from "@nestjs/common";
-import { BookInfoDto } from "../dto/book-info.dto";
+import { BookInfoDto } from "../dto/BookInfoDto";
 
 @Injectable()
-export class ApiResultCoverter {
+export class ApiResultTransformer {
   // API의 반환 값이 query와 일치하는 값을 HTML 태그로 감싸기 때문에 정규표현식을 이용하여 태그 제거
   private readonly REGEXP: RegExp = /<[^>]*>?/g;
   private readonly PATTERN: DateTimeFormatter = DateTimeFormatter.ofPattern('yyyyMMdd');
