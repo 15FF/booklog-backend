@@ -1,6 +1,6 @@
 import { BookInfoDto } from "./BookInfoDto";
 
-export class ResponseBookListDto {
+export class BookListResponseDto {
   count: number;
   items: BookInfoDto[];
 
