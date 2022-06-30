@@ -1,8 +1,6 @@
 import { HttpService } from "@nestjs/axios";
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { firstValueFrom } from "rxjs";
-import { BookListResponseDto } from "./dto/BookListResponseDto";
-import { ApiResultTransformer } from "./transformer/ApiResultTransformer";
 
 @Injectable()
 export class BookSearchService {
@@ -14,19 +12,11 @@ export class BookSearchService {
   
   constructor (
       private readonly httpService: HttpService,
-      private readonly apiResultCoverter: ApiResultTransformer
   ) {}
     
-  public async callBookApi(bookQuery: string): Promise<BookListResponseDto> {
+  public async callBookApi(bookQuery: string): Promise<any> {
     const params = { query: bookQuery };
-    
-    try {
-      const searchResult = await firstValueFrom(this.httpService.get(this.URL, { params, headers: this.API_KEY }));
-      const bookInfoDtos = this.apiResultCoverter.toBookInfoDtos(searchResult.data);
-      const bookListResponseDto = new BookListResponseDto(bookInfoDtos.length, bookInfoDtos);
-      return bookListResponseDto;
-    } catch (e) {
-      throw new BadRequestException(["bookQuery should not be empty"]);
-    }
+    const apiResult = await firstValueFrom(this.httpService.get(this.URL, { params, headers: this.API_KEY }));
+    return apiResult.data;
   }
 }
