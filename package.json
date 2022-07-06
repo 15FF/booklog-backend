@@ -37,6 +37,7 @@
     "config": "^3.3.7",
     "dotenv": "^16.0.1",
     "mysql2": "^2.3.3",
+    "nest-winston": "^1.6.2",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
@@ -45,7 +46,8 @@
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.4.0",
     "ts-mockito": "^2.6.1",
-    "typeorm": "^0.3.6"
+    "typeorm": "^0.3.6",
+    "winston": "^3.8.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",

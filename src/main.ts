@@ -1,16 +1,21 @@
 import { NestFactory } from '@nestjs/core';
 import { OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
 import 'dotenv/config';
+import { WinstonModule } from 'nest-winston';
 import { AppModule } from './AppModule';
 import { swaggerConfig } from './config/SwaggerConfig';
+import { winstonLoggerConfig } from './config/WinstonLoggerConfig';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-
+  const app = await NestFactory.create(AppModule, {
+    logger: WinstonModule.createLogger(
+      winstonLoggerConfig
+    )
+  });
+  
   // Swagger 설정
-  let document: OpenAPIObject;
   if (process.env.NODE_ENV !== 'production') {
-    document = SwaggerModule.createDocument(app, swaggerConfig);
+    const document: OpenAPIObject = SwaggerModule.createDocument(app, swaggerConfig);
     SwaggerModule.setup('api', app, document);
   }
 
