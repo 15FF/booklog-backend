@@ -1,7 +1,7 @@
 import { BadRequestException, INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import 'dotenv/config';
-import { BooksModule } from "src/book/BookModule";
+import { BookModule } from "src/book/BookModule";
 import { BookRepository } from "src/book/BookRepository";
 import { BookSearchService } from 'src/book/BookSearchService';
 import * as request from 'supertest';
@@ -33,7 +33,7 @@ describe('BookController (e2e)', () => {
     const mockRepository: BookRepository = mock(BookRepository);
     when(mockSearchService.callBookApi('큐피와 그린구스')).thenResolve(naverSearchApiResult);
     when(mockSearchService.callBookApi(`''`)).thenThrow(new BadRequestException(["bookQuery should not be empty"]));
-    const moduleRef = await Test.createTestingModule({ imports: [BooksModule] })
+    const moduleRef = await Test.createTestingModule({ imports: [BookModule] })
       .overrideProvider(BookSearchService).useValue(instance(mockSearchService))
       .overrideProvider(BookRepository).useValue(instance(mockRepository))
       .compile();

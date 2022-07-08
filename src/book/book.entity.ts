@@ -9,27 +9,31 @@ export class Book extends BaseTimeEntity {
   title: string;
 
   @Column()
-  author: string;
-  
-  @Column()
-  publisher: string;
+  image: string;
 
   @Column()
-  isbn: string;
+  author: string;
+
+  @Column()
+  publisher: string;
 
   @Column({
     type: 'timestamp',
     transformer: new LocalDateTransformer(),
   })
   pubdate: LocalDate;
-  
-  static from(title: string, author: string, publisher: string, isbn: string, pubdate: LocalDate): Book {
+
+  @Column()
+  isbn: string;
+
+  static from(title: string, image: string, author: string, publisher: string, pubdate: LocalDate, isbn: string): Book {
     const book = new Book()
     book.title = title;
+    book.image = image;
     book.author = author;
     book.publisher = publisher;
-    book.isbn = isbn;
     book.pubdate = pubdate;
+    book.isbn = isbn;
     return book;
   }
 }

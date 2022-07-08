@@ -1,16 +1,16 @@
 import { LocalDate } from "@js-joda/core";
-import { Book } from "../Book.entity";
+import { Book } from "../../book/Book.entity";
 
-export class BookInfoDto {
+export class BookSaveDto {
   title: string;
   image: string;
   author: string;
   publisher: string;
-  pubdate: LocalDate;
+  pubdate: string;
   isbn: string;
 
   constructor(title: string, image: string, author: string,
-    publisher: string, pubdate: LocalDate, isbn: string) {
+    publisher: string, pubdate: string, isbn: string) {
     this.title = title;
     this.image = image;
     this.author = author;
@@ -19,7 +19,7 @@ export class BookInfoDto {
     this.isbn = isbn;
   }
 
-  to(): Book {
-    return Book.from(this.title, this.image, this.author, this.publisher, this.pubdate, this.isbn);
+  to(): Book {;
+    return Book.from(this.title, this.image, this.author, this.publisher, LocalDate.parse(this.pubdate), this.isbn);
   }
 }

@@ -15,4 +15,4 @@ import { ApiResultTransformer } from './transformer/ApiResultTransformer';
   controllers: [BookController],
   providers: [BookService, BookSearchService, ApiResultTransformer]
 })
-export class BooksModule {}
+export class BookModule {}
