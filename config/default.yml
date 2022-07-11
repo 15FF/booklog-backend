@@ -5,6 +5,7 @@ db:
   type: 'mysql'
   port: 3306
   database: 'booklog'
+  logging: false
 
 jwt:
   expiresIn: 3600

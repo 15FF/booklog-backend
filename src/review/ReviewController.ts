@@ -1,6 +1,6 @@
 import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
-import { reviewSaveRequestDto } from './dto/reviewSaveRequestDto';
+import { ReviewSaveRequestDto } from './dto/reviewSaveRequestDto';
 import { ReviewService } from './ReviewService';
 
 @ApiTags('Review')
@@ -12,7 +12,7 @@ export class ReviewController {
   @ApiCreatedResponse({ description: '독서록 등록' })
   saveReview(@Body(new ValidationPipe({
     transform: true
-  })) reviewSaveRequestDto: reviewSaveRequestDto) {
+  })) reviewSaveRequestDto: ReviewSaveRequestDto) {
     return this.reviewService.saveReview(reviewSaveRequestDto.toBookSaveDto(),
       reviewSaveRequestDto.toReviewSaveDto());
   }
