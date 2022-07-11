@@ -3,7 +3,7 @@ import { IsNotEmpty } from "class-validator";
 import { BookSaveDto } from "./bookSaveDto";
 import { ReviewSaveDto } from "./reviewSaveDto";
 
-export class reviewSaveRequestDto {
+export class ReviewSaveRequestDto {
   @IsNotEmpty()
   @ApiProperty({type: String})
   bookTitle: string;
