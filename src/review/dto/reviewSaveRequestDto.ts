@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
+import { User } from "src/auth/User.entity";
 import { BookSaveDto } from "./bookSaveDto";
 import { ReviewSaveDto } from "./reviewSaveDto";
 
@@ -33,10 +34,6 @@ export class ReviewSaveRequestDto {
   title: string;
 
   @IsNotEmpty()
-  @ApiProperty({type: String})
-  user: string;
-
-  @IsNotEmpty()
   @ApiProperty({type: Number})
   rating: number;
 
@@ -59,11 +56,11 @@ export class ReviewSaveRequestDto {
     );
   }
 
-  toReviewSaveDto(): ReviewSaveDto {
+  toReviewSaveDto(user: User): ReviewSaveDto {
     return new ReviewSaveDto(
       this.title,
-      this.user,
       this.rating,
+      user,
       this.status,
       this.description
     );
