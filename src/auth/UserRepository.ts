@@ -3,6 +3,7 @@ import * as bcrypt from 'bcryptjs';
 import { CustomRepository } from "src/db/TypeOrmExDecorator";
 import { Repository } from "typeorm";
 import { AuthCredentialDto } from "./dto/AuthCredentialDto";
+import { UserInfoDto } from './dto/UserInfoDto';
 import { User } from "./User.entity";
 
 @CustomRepository(User)
@@ -24,5 +25,10 @@ export class UserRepository extends Repository<User> {
         throw new InternalServerErrorException();
       }
     }
+  }
+
+  async findByUserName(username: string): Promise<UserInfoDto> {
+    const user: User = await this.findOneBy({ username });
+    return new UserInfoDto(user.id, user.username);
   }
 }
