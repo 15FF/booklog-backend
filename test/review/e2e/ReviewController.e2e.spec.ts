@@ -36,13 +36,11 @@ describe('ReviewController (e2e)', () => {
     await app.init();
     
     const user = {
-      username: 'greengoose',
-      password: 'password1',
+      'username': 'username',
+      'password': 'password',
     }
+    await userRepository.createUser(user);
     
-    await request(app.getHttpServer())
-      .post('/auth/register')
-      .send(user)
     const response = await request(app.getHttpServer())
       .post('/auth/signin')
       .send(user)
