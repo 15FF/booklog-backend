@@ -10,12 +10,18 @@ export class Review extends BaseTimeEntity {
   title: string;
 
   @ManyToOne(type => User)
-  @JoinColumn()
+  @JoinColumn({ name : 'user_id' })
   user: User;
 
+  @Column({ nullable: true })
+  user_id: number
+
   @ManyToOne(type => Book)
-  @JoinColumn()
+  @JoinColumn({ name : 'book_id' })
   book: Book;
+
+  @Column({ nullable: true })
+  book_id: number
 
   @Column()
   rating: number;
