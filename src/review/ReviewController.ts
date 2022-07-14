@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { GetUser } from 'src/auth/GetUserDecorator';
@@ -7,15 +7,16 @@ import { BookSaveDto } from './dto/BookSaveDto';
 import { ReviewSaveDto } from './dto/ReviewSaveDto';
 import { ReviewSaveRequestDto } from './dto/ReviewSaveRequestDto';
 import { ReviewUpdateRequestDto } from './dto/ReviewUpdateRequestDto';
+import { Review } from './Review.entity';
 import { ReviewService } from './ReviewService';
 
 @ApiTags('Review')
-@UseGuards(AuthGuard())
 @Controller('review')
 export class ReviewController {
   constructor(private reviewService: ReviewService) {}
 
   @Post()
+  @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiCreatedResponse({ description: '독서록 등록' })
   saveReview(
@@ -28,6 +29,7 @@ export class ReviewController {
   }
 
   @Patch('/:id')
+  @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiCreatedResponse({ description: '독서록 수정' })
   updateReview(
@@ -39,6 +41,7 @@ export class ReviewController {
   }
 
   @Delete('/:id')
+  @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @ApiCreatedResponse({ description: '독서록 삭제' })
   deleteReview(
@@ -47,4 +50,11 @@ export class ReviewController {
   ): Promise<void> {
     return this.reviewService.deleteReview(id, user);;
   }
+
+  @Get()
+  @ApiCreatedResponse({ description: '독서록 전체 조회' })
+  findAllReview(): Promise<Review[]> {
+    return this.reviewService.findAllReview();
+  }
+
 }

@@ -118,6 +118,18 @@ describe('[ReviewService]', () => {
     const count = await reviewRepository.count();
     expect(count).toBe(0);
   });
+
+  it('독서록 전체 조회', async () => {
+    // given
+    await reviewRepository.save(dummyReview());
+    await reviewRepository.save(dummyReview());
+    
+    // when
+    const reviews = await sut.findAllReview();
+
+    // then
+    expect(reviews.length).toBe(2);
+  });
   
   function dummyReviewSaveRequestDto(): ReviewSaveRequestDto {
     return new ReviewSaveRequestDto (

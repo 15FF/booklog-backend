@@ -5,6 +5,8 @@ import { BookRepository } from 'src/book/BookRepository';
 import { BookSaveDto } from './dto/BookSaveDto';
 import { ReviewSaveDto } from './dto/ReviewSaveDto';
 import { ReviewUpdateRequestDto } from './dto/ReviewUpdateRequestDto';
+import { ReviewStatus } from './enum/ReviewStatus';
+import { Review } from './Review.entity';
 import { ReviewRepository } from './ReviewRepository';
 
 @Injectable()
@@ -38,4 +40,10 @@ export class ReviewService {
     }   
     return await this.reviewRepository.deleteById(id);
   };
+
+  async findAllReview(): Promise<Review[]> {
+    return await this.reviewRepository.findBy({ 
+      status: ReviewStatus.PUBLIC
+    })
+  }
 }
