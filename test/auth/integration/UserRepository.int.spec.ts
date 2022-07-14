@@ -9,7 +9,7 @@ import { typeORMConfig } from "src/config/TypeOrmConfig";
 
 describe('[UserRepository]', () => {
   let app: INestApplication;
-  let userRepository: UserRepository;
+  let sut: UserRepository;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -19,7 +19,7 @@ describe('[UserRepository]', () => {
       ]
     }).compile();
 
-    userRepository = moduleRef.get<UserRepository>(UserRepository);
+    sut = moduleRef.get<UserRepository>(UserRepository);
     
     app = moduleRef.createNestApplication();
     app.useGlobalPipes(
@@ -29,7 +29,7 @@ describe('[UserRepository]', () => {
   });
 
   afterEach(async () => {
-    await userRepository.delete({});
+    await sut.delete({});
   });
 
   afterAll(async () => {
@@ -41,25 +41,25 @@ describe('[UserRepository]', () => {
     const authCredentialDto: AuthCredentialDto = new AuthCredentialDto("username", "password");
     
     // when
-    await userRepository.createUser(authCredentialDto);
+    await sut.createUser(authCredentialDto);
 
     // then
-    const count = await userRepository.count();
+    const count = await sut.count();
     expect(count).toBe(1);
   })
 
   it('사용자명 중복시 오류 발생',async () => {
     // given
     const authCredentialDto: AuthCredentialDto = new AuthCredentialDto("username", "password");
-    await userRepository.createUser(authCredentialDto);
+    await sut.createUser(authCredentialDto);
     
     // when
-    const sut = async () => {
-      await userRepository.createUser(authCredentialDto);
+    const result = async () => {
+      await sut.createUser(authCredentialDto);
     };
 
     // then
-    await expect(sut).rejects.toThrowError(
+    await expect(result).rejects.toThrowError(
       new ConflictException('Existing username'),
     );
   })
