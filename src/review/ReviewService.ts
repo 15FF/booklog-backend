@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Book } from 'src/book/Book.entity';
 import { BookRepository } from 'src/book/BookRepository';
-import { BookSaveDto } from './dto/bookSaveDto';
-import { ReviewSaveDto } from './dto/reviewSaveDto';
+import { BookSaveDto } from './dto/BookSaveDto';
+import { ReviewSaveDto } from './dto/ReviewSaveDto';
 import { ReviewRepository } from './ReviewRepository';
 
 @Injectable()

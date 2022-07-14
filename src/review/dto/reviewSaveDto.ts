@@ -1,16 +1,17 @@
 import { User } from "src/auth/User.entity";
 import { Book } from "src/book/Book.entity";
+import { ReviewStatus } from "../enum/ReviewStatus";
 import { Review } from "../Review.entity";
 
 export class ReviewSaveDto {
   title: string;
   rating: number;
   user: User;
-  status: boolean;
+  status: ReviewStatus;
   description: string;
 
   constructor(title: string, rating: number, user: User,
-    status: boolean, description: string) {
+    status: ReviewStatus, description: string) {
     this.title = title;
     this.rating = rating;
     this.user = user;

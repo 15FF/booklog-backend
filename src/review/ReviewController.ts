@@ -3,9 +3,9 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { GetUser } from 'src/auth/GetUserDecorator';
 import { User } from 'src/auth/User.entity';
-import { BookSaveDto } from './dto/bookSaveDto';
-import { ReviewSaveDto } from './dto/reviewSaveDto';
-import { ReviewSaveRequestDto } from './dto/reviewSaveRequestDto';
+import { BookSaveDto } from './dto/BookSaveDto';
+import { ReviewSaveDto } from './dto/ReviewSaveDto';
+import { ReviewSaveRequestDto } from './dto/ReviewSaveRequestDto';
 import { ReviewService } from './ReviewService';
 
 @ApiTags('Review')

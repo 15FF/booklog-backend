@@ -5,7 +5,8 @@ import 'dotenv/config';
 import { User } from "src/auth/User.entity";
 import { UserRepository } from "src/auth/UserRepository";
 import { typeORMConfig } from "src/config/TypeOrmConfig";
-import { ReviewSaveRequestDto } from "src/review/dto/reviewSaveRequestDto";
+import { ReviewSaveRequestDto } from "src/review/dto/ReviewSaveRequestDto";
+import { ReviewStatus } from "src/review/enum/ReviewStatus";
 import { ReviewController } from "src/review/ReviewController";
 import { ReviewModule } from "src/review/ReviewModule";
 import { ReviewRepository } from "src/review/ReviewRepository";
@@ -74,7 +75,7 @@ function dummyReviewSaveRequestDto(): ReviewSaveRequestDto {
     "9791141844829",
     "qilip의 greeng00se 사냥기 100.0",
     9,
-    true,
+    ReviewStatus.PUBLIC,
     "독서록 내용"
   );
 }

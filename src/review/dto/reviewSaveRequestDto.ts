@@ -1,8 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
 import { User } from "src/auth/User.entity";
-import { BookSaveDto } from "./bookSaveDto";
-import { ReviewSaveDto } from "./reviewSaveDto";
+import { ReviewStatus } from "../enum/ReviewStatus";
+import { BookSaveDto } from "./BookSaveDto";
+import { ReviewSaveDto } from "./ReviewSaveDto";
 
 export class ReviewSaveRequestDto {
   @IsNotEmpty()
@@ -38,8 +39,8 @@ export class ReviewSaveRequestDto {
   rating: number;
 
   @IsNotEmpty()
-  @ApiProperty({type: Boolean})
-  status: boolean;
+  @ApiProperty({type: ReviewStatus})
+  status: ReviewStatus;
 
   @IsNotEmpty()
   @ApiProperty({type: String})
@@ -54,7 +55,7 @@ export class ReviewSaveRequestDto {
     bookIsbn: string,
     title: string,
     rating: number,
-    status: boolean,
+    status: ReviewStatus,
     description: string) {
     this.bookTitle = bookTitle;
     this.bookImage = bookImage;

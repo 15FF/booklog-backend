@@ -6,6 +6,7 @@ import { AuthModule } from "src/auth/AuthModule";
 import { UserRepository } from "src/auth/UserRepository";
 import { BookRepository } from "src/book/BookRepository";
 import { typeORMConfig } from "src/config/TypeOrmConfig";
+import { ReviewStatus } from "src/review/enum/ReviewStatus";
 import { ReviewModule } from "src/review/ReviewModule";
 import { ReviewRepository } from "src/review/ReviewRepository";
 import * as request from 'supertest';
@@ -68,7 +69,7 @@ describe('ReviewController (e2e)', () => {
       "bookIsbn": "9791141844829",
       "title": "qilip의 greeng00se 사냥기 100.0",
       "rating": 9,
-      "status": true,
+      "status": 'PUBLIC',
       "description": "독서록 내용"
     }
     
@@ -83,6 +84,7 @@ describe('ReviewController (e2e)', () => {
     const savedReview = await reviewRepository.findOneBy({ id: reviewId })
     expect(savedReview.title).toStrictEqual(reviewData.title);
     expect(savedReview.description).toStrictEqual(reviewData.description);
+    expect(savedReview.status).toStrictEqual(ReviewStatus.PUBLIC);
   });
 });
 
