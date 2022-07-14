@@ -1,4 +1,4 @@
-import { INestApplication, UnauthorizedException, ValidationPipe } from "@nestjs/common";
+import { INestApplication, UnauthorizedException } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import 'dotenv/config';
@@ -26,9 +26,6 @@ describe('[JwtStrategy]', () => {
     sut = moduleRef.get<JwtStrategy>(JwtStrategy);
     
     app = moduleRef.createNestApplication();
-    app.useGlobalPipes(
-      new ValidationPipe({ transform: true }
-    ))
     await app.init();
   });
 
@@ -55,7 +52,7 @@ describe('[JwtStrategy]', () => {
     expect(result).toBeDefined();
     expect(result.username).toBe(username);
     expect(result.id).toBeDefined();
-  })
+  });
 
   it('사용자가 존재하지 않는 경우 UnauthorizedException를 던진다.',async () => {
     // given
@@ -71,5 +68,5 @@ describe('[JwtStrategy]', () => {
     await expect(result).rejects.toThrowError(
       new UnauthorizedException(),
     );
-  })
+  });
 });

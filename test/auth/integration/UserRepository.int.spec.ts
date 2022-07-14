@@ -1,4 +1,4 @@
-import { ConflictException, INestApplication, ValidationPipe } from "@nestjs/common";
+import { ConflictException, INestApplication } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import 'dotenv/config';
@@ -22,9 +22,6 @@ describe('[UserRepository]', () => {
     sut = moduleRef.get<UserRepository>(UserRepository);
     
     app = moduleRef.createNestApplication();
-    app.useGlobalPipes(
-      new ValidationPipe({ transform: true }
-    ));
     await app.init();
   });
 
@@ -44,9 +41,9 @@ describe('[UserRepository]', () => {
     await sut.createUser(authCredentialDto);
 
     // then
-    const count = await sut.count();
-    expect(count).toBe(1);
-  })
+    const result = await sut.count();
+    expect(result).toBe(1);
+  });
 
   it('사용자명 중복시 오류 발생',async () => {
     // given
@@ -62,5 +59,5 @@ describe('[UserRepository]', () => {
     await expect(result).rejects.toThrowError(
       new ConflictException('Existing username'),
     );
-  })
+  });
 });
