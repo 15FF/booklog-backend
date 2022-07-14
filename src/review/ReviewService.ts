@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { User } from 'src/auth/User.entity';
 import { Book } from 'src/book/Book.entity';
 import { BookRepository } from 'src/book/BookRepository';
 import { BookSaveDto } from './dto/BookSaveDto';
@@ -22,7 +23,13 @@ export class ReviewService {
     return savedReview.id;
   }
 
-  async updateReview(reviewUpdateReqeustDto: ReviewUpdateRequestDto, id: number): Promise<number> {
+  async updateReview(reviewUpdateReqeustDto: ReviewUpdateRequestDto, id: number, user: User): Promise<number> {
+    const review = await this.reviewRepository.findOneBy({ id });
+    if (review.user_id != user.id) {
+      throw new UnauthorizedException();
+    }   
     return await this.reviewRepository.updateByUpdateRequestDto(reviewUpdateReqeustDto, id);
   };
+
+
 }

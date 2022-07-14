@@ -27,7 +27,11 @@ export class ReviewController {
   @Patch('/:id')
   @ApiBearerAuth()
   @ApiCreatedResponse({ description: '독서록 수정' })
-  updateReview(@Body() reviewUpdateReqeustDto: ReviewUpdateRequestDto, @Param('id', ParseIntPipe) id: number,): Promise<number> {
-    return this.reviewService.updateReview(reviewUpdateReqeustDto, id);
+  updateReview(@Body() reviewUpdateReqeustDto: ReviewUpdateRequestDto, 
+    @Param('id', ParseIntPipe) 
+    id: number, @GetUser() user: User): Promise<number> {
+    return this.reviewService.updateReview(reviewUpdateReqeustDto, id, user);
   }
+
+
 }

@@ -96,12 +96,14 @@ describe('[ReviewController]', () => {
     );
 
     // when
-    const id = await sut.updateReview(reviewUpdateRequestDto, review.id);
+    const id = await sut.updateReview(reviewUpdateRequestDto, review.id, user);
 
     // then
     const savedReview = await reviewRepository.findOneBy({id: id});
     expect(savedReview.description).toBe(reviewUpdateRequestDto.description);
   });
+
+
 
   function dummyReviewSaveRequestDto(): ReviewSaveRequestDto {
     return new ReviewSaveRequestDto(
