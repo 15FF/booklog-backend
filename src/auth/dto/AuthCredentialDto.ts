@@ -22,4 +22,9 @@ export class AuthCredentialDto {
     type: String
   })
   password: string;
+
+  constructor(username: string, password: string) {
+    this.username = username;
+    this.password = password;
+  }
 }
