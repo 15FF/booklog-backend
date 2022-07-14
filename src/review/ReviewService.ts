@@ -31,5 +31,11 @@ export class ReviewService {
     return await this.reviewRepository.updateByUpdateRequestDto(reviewUpdateReqeustDto, id);
   };
 
-
+  async deleteReview(id: number, user: User): Promise<void> {
+    const review = await this.reviewRepository.findOneBy({ id });
+    if (review.user_id != user.id) {
+      throw new UnauthorizedException();
+    }   
+    return await this.reviewRepository.deleteById(id);
+  };
 }

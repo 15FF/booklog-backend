@@ -103,7 +103,18 @@ describe('[ReviewController]', () => {
     expect(savedReview.description).toBe(reviewUpdateRequestDto.description);
   });
 
+  it('독서록 삭제', async () => {
+    // given
+    const review = dummyReview();
+    await reviewRepository.save(review);
+    
+    // when
+    const id = await sut.deleteReview(review.id, user);
 
+    // then
+    const count = await reviewRepository.count();
+    expect(count).toBe(0);
+  });
 
   function dummyReviewSaveRequestDto(): ReviewSaveRequestDto {
     return new ReviewSaveRequestDto(

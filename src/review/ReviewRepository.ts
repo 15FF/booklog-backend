@@ -6,9 +6,8 @@ import { Review } from "./Review.entity";
 @CustomRepository(Review)
 export class ReviewRepository extends Repository<Review> {
   
-  async updateByUpdateRequestDto(reviewUpdateReqeustDto: ReviewUpdateRequestDto, reviewId: number) {
-    await this
-      .createQueryBuilder()
+  async updateByUpdateRequestDto(reviewUpdateReqeustDto: ReviewUpdateRequestDto, reviewId: number): Promise<number> {
+    await this.createQueryBuilder()
       .update(Review)
       .set({ 
         title: reviewUpdateReqeustDto.title, 
@@ -19,5 +18,13 @@ export class ReviewRepository extends Repository<Review> {
       .where("id = :id", { id: reviewId })
       .execute();
     return reviewId;
+  }
+
+  async deleteById(reviewId: number): Promise<void> {
+    await this.createQueryBuilder()
+      .delete()
+      .from(Review)
+      .where("id = :id", { id: reviewId })
+      .execute()
   }
 }
