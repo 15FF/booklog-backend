@@ -39,7 +39,7 @@ export class ReviewSaveRequestDto {
   rating: number;
 
   @IsNotEmpty()
-  @ApiProperty({type: ReviewStatus})
+  @ApiProperty({ enum: [ ReviewStatus.PRIVATE, ReviewStatus.PUBLIC ]})
   status: ReviewStatus;
 
   @IsNotEmpty()
