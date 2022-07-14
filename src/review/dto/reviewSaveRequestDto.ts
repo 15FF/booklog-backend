@@ -1,7 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
-import { BookSaveDto } from "./bookSaveDto";
-import { ReviewSaveDto } from "./reviewSaveDto";
+import { User } from "src/auth/User.entity";
+import { ReviewStatus } from "../enum/ReviewStatus";
+import { BookSaveDto } from "./BookSaveDto";
+import { ReviewSaveDto } from "./ReviewSaveDto";
 
 export class ReviewSaveRequestDto {
   @IsNotEmpty()
@@ -33,20 +35,39 @@ export class ReviewSaveRequestDto {
   title: string;
 
   @IsNotEmpty()
-  @ApiProperty({type: String})
-  user: string;
-
-  @IsNotEmpty()
   @ApiProperty({type: Number})
   rating: number;
 
   @IsNotEmpty()
-  @ApiProperty({type: Boolean})
-  status: boolean;
+  @ApiProperty({ enum: [ ReviewStatus.PRIVATE, ReviewStatus.PUBLIC ]})
+  status: ReviewStatus;
 
   @IsNotEmpty()
   @ApiProperty({type: String})
   description: string;
+
+  constructor(
+    bookTitle: string, 
+    bookImage: string, 
+    bookAuthor: string, 
+    bookPublisher: string, 
+    bookPubdate: string, 
+    bookIsbn: string,
+    title: string,
+    rating: number,
+    status: ReviewStatus,
+    description: string) {
+    this.bookTitle = bookTitle;
+    this.bookImage = bookImage;
+    this.bookAuthor = bookAuthor;
+    this.bookPublisher = bookPublisher;
+    this.bookPubdate = bookPubdate;
+    this.bookIsbn = bookIsbn;
+    this.title = title;
+    this.rating = rating;
+    this.status = status;
+    this.description = description;
+  }
 
   toBookSaveDto(): BookSaveDto {
     return new BookSaveDto(
@@ -59,11 +80,11 @@ export class ReviewSaveRequestDto {
     );
   }
 
-  toReviewSaveDto(): ReviewSaveDto {
+  toReviewSaveDto(user: User): ReviewSaveDto {
     return new ReviewSaveDto(
       this.title,
-      this.user,
       this.rating,
+      user,
       this.status,
       this.description
     );
