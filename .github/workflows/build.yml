@@ -20,7 +20,7 @@ jobs:
       - name: Test and coverage
         run: npm run test:cov
         env:
-          RDS_HOSTNAME: ${{ secrets.RDS_USERNAME }}
+          RDS_HOSTNAME: ${{ secrets.RDS_HOSTNAME }}
           RDS_USERNAME: ${{ secrets.RDS_USERNAME }}
           RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
       - name: SonarCloud Scan
