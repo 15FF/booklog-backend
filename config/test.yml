@@ -2,5 +2,6 @@ db:
   host: 'localhost'
   username: 'root'
   password: '1234'
+  database: 'testbooklog'
   synchronize: true
-  logging: true
+  logging: false
