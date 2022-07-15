@@ -15,7 +15,6 @@ export class BookService {
   async getBooks(bookQuery: string): Promise<BookListResponseDto> {
     const searchResult = await this.bookSearchService.callBookApi(bookQuery);
     const bookInfoDtos = this.apiResultCoverter.toBookInfoDtos(searchResult);
-    const bookListResponseDto = new BookListResponseDto(bookInfoDtos.length, bookInfoDtos);
-    return bookListResponseDto;
+    return new BookListResponseDto(bookInfoDtos.length, bookInfoDtos);
   }
 }

@@ -9,14 +9,14 @@ export class Review extends BaseTimeEntity {
   @Column()
   title: string;
 
-  @ManyToOne(type => User)
+  @ManyToOne(_type => User)
   @JoinColumn({ name : 'user_id' })
   user: User;
 
   @Column({ nullable: true })
   user_id: number
 
-  @ManyToOne(type => Book)
+  @ManyToOne(_type => Book)
   @JoinColumn({ name : 'book_id' })
   book: Book;
 

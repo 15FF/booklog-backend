@@ -132,18 +132,18 @@ describe('[ReviewService]', () => {
   });
   
   function dummyReviewSaveRequestDto(): ReviewSaveRequestDto {
-    return new ReviewSaveRequestDto (
-      "greeng00se 장편선",
-      "https:\/\/fake.example.com\/asdf\/123\/456\/12345678.jpg?type=m1&udate=amavvdko",
-      "qilip",
-      "곤운",
-      "2016-01-01",
-      "9791141844829",
-      "qilip의 greeng00se 사냥기 100.0",
-      9,
-      ReviewStatus.PUBLIC,
-      "독서록 내용"
-    );
+    const result: ReviewSaveRequestDto = new ReviewSaveRequestDto();
+    result.bookTitle = "greeng00se 장편선";
+    result.bookImage = "https:\/\/fake.example.com\/asdf\/123\/456\/12345678.jpg?type=m1&udate=amavvdko";
+    result.bookAuthor = "qilip";
+    result.bookPublisher = "곤운";
+    result.bookPubdate = "2016-01-01";
+    result.bookIsbn = "9791141844829";
+    result.title = "qilip의 greeng00se 사냥기 100.0";
+    result.rating = 9;
+    result.status = ReviewStatus.PUBLIC;
+    result.description = "독서록 내용";
+    return result;
   }
   
   function dummyReview(): Review {

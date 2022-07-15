@@ -48,7 +48,7 @@ export class ReviewController {
     @Param('id', ParseIntPipe) id: number, 
     @GetUser() user: User
   ): Promise<void> {
-    return this.reviewService.deleteReview(id, user);;
+    return this.reviewService.deleteReview(id, user);
   }
 
   @Get()
