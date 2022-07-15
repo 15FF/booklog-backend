@@ -13,4 +13,7 @@ export const typeORMConfig: TypeOrmModuleOptions = {
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   synchronize: dbConfig.synchronize,
   logging: dbConfig.logging,
+  ssl: {
+    ca: process.env.SSL_CERT,
+  },
 };
