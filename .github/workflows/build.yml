@@ -19,11 +19,12 @@ jobs:
         run: yarn
       - name: Test and coverage
         run: yarn jest --coverage
+        env:
+          RDS_HOSTNAME: ${{ secrets.RDS_USERNAME }}
+          RDS_USERNAME: ${{ secrets.RDS_USERNAME }}
+          RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          RDS_HOSTNAME: ${{ secrets.RDS_USERNAME }}
-          RDS_USERNAME: ${{ secrets.RDS_USERNAME }}
-          RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
