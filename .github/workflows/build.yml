@@ -23,6 +23,8 @@ jobs:
           RDS_HOSTNAME: ${{ secrets.RDS_HOSTNAME }}
           RDS_USERNAME: ${{ secrets.RDS_USERNAME }}
           RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
+          SSL_CERT: ${{ secrets.SSL_CERT }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
