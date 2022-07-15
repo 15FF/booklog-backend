@@ -33,7 +33,7 @@ describe('[UserRepository]', () => {
     await app.close();
   });
 
-  it('사용자 생성',async () => {
+  it('사용자 생성', async () => {
     // given
     const authCredentialDto: AuthCredentialDto = new AuthCredentialDto("username", "password");
     
@@ -45,7 +45,7 @@ describe('[UserRepository]', () => {
     expect(result).toBe(1);
   });
 
-  it('사용자명 중복시 오류 발생',async () => {
+  it('사용자명 중복시 오류 발생', async () => {
     // given
     const authCredentialDto: AuthCredentialDto = new AuthCredentialDto("username", "password");
     await sut.createUser(authCredentialDto);
