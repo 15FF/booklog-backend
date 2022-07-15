@@ -46,29 +46,6 @@ export class ReviewSaveRequestDto {
   @ApiProperty({type: String})
   description: string;
 
-  constructor(
-    bookTitle: string, 
-    bookImage: string, 
-    bookAuthor: string, 
-    bookPublisher: string, 
-    bookPubdate: string, 
-    bookIsbn: string,
-    title: string,
-    rating: number,
-    status: ReviewStatus,
-    description: string) {
-    this.bookTitle = bookTitle;
-    this.bookImage = bookImage;
-    this.bookAuthor = bookAuthor;
-    this.bookPublisher = bookPublisher;
-    this.bookPubdate = bookPubdate;
-    this.bookIsbn = bookIsbn;
-    this.title = title;
-    this.rating = rating;
-    this.status = status;
-    this.description = description;
-  }
-
   toBookSaveDto(): BookSaveDto {
     return new BookSaveDto(
       this.bookTitle,

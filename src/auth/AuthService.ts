@@ -12,7 +12,7 @@ export class AuthService {
   ) {}
 
   async register(authCredentialDto: AuthCredentialDto): Promise<void> {
-    return await this.userRepository.createUser(authCredentialDto);
+    await this.userRepository.createUser(authCredentialDto);
   }
 
   async signIn(authCredentialDto: AuthCredentialDto): Promise<{accessToken: string}> {

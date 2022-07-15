@@ -19,7 +19,7 @@ export class BookSaveDto {
     this.isbn = isbn;
   }
 
-  to(): Book {;
+  to(): Book {
     return Book.from(this.title, this.image, this.author, this.publisher, LocalDate.parse(this.pubdate), this.isbn);
   }
 }

@@ -30,19 +30,19 @@ export class ReviewService {
     if (review.user_id != user.id) {
       throw new UnauthorizedException();
     }   
-    return await this.reviewRepository.updateByUpdateRequestDto(reviewUpdateReqeustDto, id);
-  };
+    return this.reviewRepository.updateByUpdateRequestDto(reviewUpdateReqeustDto, id);
+  }
 
   async deleteReview(id: number, user: User): Promise<void> {
     const review = await this.reviewRepository.findOneBy({ id });
     if (review.user_id != user.id) {
       throw new UnauthorizedException();
     }   
-    return await this.reviewRepository.deleteById(id);
-  };
+    return this.reviewRepository.deleteById(id);
+  }
 
   async findAllReview(): Promise<Review[]> {
-    return await this.reviewRepository.findBy({ 
+    return this.reviewRepository.findBy({ 
       status: ReviewStatus.PUBLIC
     })
   }
