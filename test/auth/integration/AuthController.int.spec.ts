@@ -29,7 +29,7 @@ describe('[AuthController]', () => {
     await app.init();
   });
 
-  beforeEach(async () => {
+  afterEach(async () => {
     await userRepository.delete({});
   });
 

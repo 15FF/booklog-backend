@@ -38,9 +38,6 @@ describe('[ReviewController]', () => {
     app = moduleRef.createNestApplication();
     await app.init();
 
-    await userRepository.delete({});
-    await bookRepository.delete({});
-
     // 테스트를 위한 사용자 추가
     const username = 'username';
     const password = 'password';
@@ -64,6 +61,8 @@ describe('[ReviewController]', () => {
   });
 
   afterAll(async () => {
+    await userRepository.delete({});
+    await bookRepository.delete({});
     await app.close();
   });
 
