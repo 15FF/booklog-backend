@@ -3,9 +3,10 @@ import { User } from 'src/auth/User.entity';
 import { Book } from 'src/book/Book.entity';
 import { BookRepository } from 'src/book/BookRepository';
 import { BookSaveDto } from './dto/BookSaveDto';
+import { ReviewListResponseDto } from './dto/ReviewListResponseDto';
+import { ReviewRequestDto } from './dto/ReviewRequestDto';
 import { ReviewSaveDto } from './dto/ReviewSaveDto';
 import { ReviewUpdateRequestDto } from './dto/ReviewUpdateRequestDto';
-import { ReviewStatus } from './enum/ReviewStatus';
 import { Review } from './Review.entity';
 import { ReviewRepository } from './ReviewRepository';
 
@@ -41,10 +42,8 @@ export class ReviewService {
     return this.reviewRepository.deleteById(id);
   }
 
-  async findAllReview(): Promise<Review[]> {
-    return this.reviewRepository.findBy({ 
-      status: ReviewStatus.PUBLIC
-    })
+  async findRangeReview(reviewRequestDto: ReviewRequestDto): Promise<ReviewListResponseDto> {
+    return this.reviewRepository.findByReviewRequestDto(reviewRequestDto);
   }
 
   async findOneReview(id: number): Promise<Review> {

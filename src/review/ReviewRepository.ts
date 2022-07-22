@@ -54,7 +54,6 @@ export class ReviewRepository extends Repository<Review> {
       .limit(param.getLimit())
       .offset(param.getOffset())
       .getRawMany();
-
     return new ReviewListResponseDto(plainToInstance(ReviewResponseDto, reviews));
   }
 }
