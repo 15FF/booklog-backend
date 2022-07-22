@@ -46,4 +46,8 @@ export class ReviewService {
       status: ReviewStatus.PUBLIC
     })
   }
+
+  async findOneReview(id: number): Promise<Review> {
+    return this.reviewRepository.findOneBy({ id });
+  }
 }

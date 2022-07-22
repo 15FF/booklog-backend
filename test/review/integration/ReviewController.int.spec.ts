@@ -128,6 +128,18 @@ describe('[ReviewController]', () => {
     expect(reviews.length).toBe(2);
   });
 
+  it('개별 독서록 조회', async () => {
+    // given
+    const dummyResult = await reviewRepository.save(dummyReview());
+    await reviewRepository.save(dummyReview());
+
+    // when
+    const review = await sut.findOneReview(dummyResult.id);
+
+    // then
+    expect(review.id).toBe(dummyResult.id);
+  });
+
   function dummyReviewSaveRequestDto(): ReviewSaveRequestDto {
     const result: ReviewSaveRequestDto = new ReviewSaveRequestDto();
     result.bookTitle = "greeng00se 장편선";

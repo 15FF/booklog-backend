@@ -57,4 +57,9 @@ export class ReviewController {
     return this.reviewService.findAllReview();
   }
 
+  @Get(':id')
+  @ApiCreatedResponse({ description: '개별 독서록 조회' })
+  findOneReview(@Param('id', ParseIntPipe) id: number): Promise<Review> {
+    return this.reviewService.findOneReview(id);
+  }
 }
