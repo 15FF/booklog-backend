@@ -8,6 +8,8 @@ import { UserRepository } from "src/auth/UserRepository";
 import { Book } from "src/book/Book.entity";
 import { BookRepository } from "src/book/BookRepository";
 import { typeORMConfig } from "src/config/TypeOrmConfig";
+import { ReviewListResponseDto } from "src/review/dto/ReviewListResponseDto";
+import { ReviewRequestDto } from "src/review/dto/ReviewRequestDto";
 import { ReviewSaveRequestDto } from "src/review/dto/ReviewSaveRequestDto";
 import { ReviewUpdateRequestDto } from "src/review/dto/ReviewUpdateRequestDto";
 import { ReviewStatus } from "src/review/enum/ReviewStatus";
@@ -121,11 +123,13 @@ describe('[ReviewController]', () => {
     await reviewRepository.save(dummyReview());
     await reviewRepository.save(dummyReview());
     
+    const param = new ReviewRequestDto(1, 9);
+    
     // when
-    const reviews = await sut.findAllReview();
+    const result: ReviewListResponseDto = await sut.findRangeReview(param);
 
     // then
-    expect(reviews.length).toBe(2);
+    expect(result.count).toBe(2);
   });
 
   it('개별 독서록 조회', async () => {
