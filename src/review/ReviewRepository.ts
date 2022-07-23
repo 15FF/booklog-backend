@@ -37,8 +37,8 @@ export class ReviewRepository extends Repository<Review> {
 
   async findByReviewRequestDto(param: ReviewRequestDto) {
     const reviews = await this.createQueryBuilder()
-      .leftJoinAndSelect(User, "user", "user.id = user.id")
-      .leftJoinAndSelect(Book, "book", "book.id = book.id")
+      .leftJoinAndSelect(User, "user", "user.id = user_id")
+      .leftJoinAndSelect(Book, "book", "book.id = book_id")
       .select([
         "review.id AS id",
         "review.title AS title",
@@ -51,6 +51,7 @@ export class ReviewRepository extends Repository<Review> {
         "book.publisher AS bookPublisher",
       ])
       .where("review.status = :status", {status: ReviewStatus.PUBLIC})
+      .orderBy({"id": "DESC"})
       .limit(param.getLimit())
       .offset(param.getOffset())
       .getRawMany();
