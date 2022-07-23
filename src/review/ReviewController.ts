@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { GetUser } from 'src/auth/GetUserDecorator';
 import { User } from 'src/auth/User.entity';
 import { BookSaveDto } from './dto/BookSaveDto';
+import { ReviewListResponseDto } from './dto/ReviewListResponseDto';
+import { ReviewRequestDto } from './dto/ReviewRequestDto';
 import { ReviewSaveDto } from './dto/ReviewSaveDto';
 import { ReviewSaveRequestDto } from './dto/ReviewSaveRequestDto';
 import { ReviewUpdateRequestDto } from './dto/ReviewUpdateRequestDto';
@@ -53,8 +55,13 @@ export class ReviewController {
 
   @Get()
   @ApiCreatedResponse({ description: '독서록 전체 조회' })
-  findAllReview(): Promise<Review[]> {
-    return this.reviewService.findAllReview();
+  findRangeReview(@Query() reviewRequestDto: ReviewRequestDto): Promise<ReviewListResponseDto> {
+    return this.reviewService.findRangeReview(reviewRequestDto);
   }
 
+  @Get('/:id')
+  @ApiCreatedResponse({ description: '개별 독서록 조회' })
+  findOneReview(@Param('id', ParseIntPipe) id: number): Promise<Review> {
+    return this.reviewService.findOneReview(id);
+  }
 }
