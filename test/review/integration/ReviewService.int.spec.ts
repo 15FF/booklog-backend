@@ -1,5 +1,5 @@
 import { LocalDate } from "@js-joda/core";
-import { INestApplication, ValidationPipe } from "@nestjs/common";
+import { INestApplication, NotFoundException, ValidationPipe } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import 'dotenv/config';
@@ -132,6 +132,27 @@ describe('[ReviewService]', () => {
 
     // then
     expect(result.count).toBe(2);
+  });
+
+  it('개별 독서록 조회', async () => {
+    // given
+    const savedReview = await reviewRepository.save(dummyReview());
+
+    // when
+    const result = await sut.findOneReview(savedReview.id);
+
+    // then
+    expect(result.id).toBe(savedReview.id);
+  });
+
+  it('존재하지 않는 독서록 조회시 NotFoundException 발생', async () => {
+    // given
+    const savedReview = await reviewRepository.save(dummyReview());
+
+    //expected
+    await expect(async () => {
+      await sut.findOneReview(savedReview.id + 99999);
+    }).rejects.toThrow(new NotFoundException(`Review with id ${ savedReview.id + 99999 } not found`));
   });
   
   function dummyReviewSaveRequestDto(): ReviewSaveRequestDto {

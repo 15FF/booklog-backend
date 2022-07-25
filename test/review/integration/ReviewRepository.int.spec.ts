@@ -1,5 +1,5 @@
 import { LocalDate } from "@js-joda/core";
-import { INestApplication } from "@nestjs/common";
+import { INestApplication, NotFoundException } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import 'dotenv/config';
@@ -11,6 +11,7 @@ import { BookRepository } from "src/book/BookRepository";
 import { typeORMConfig } from "src/config/TypeOrmConfig";
 import { ReviewListResponseDto } from "src/review/dto/ReviewListResponseDto";
 import { ReviewRequestDto } from "src/review/dto/ReviewRequestDto";
+import { ReviewResponseDto } from "src/review/dto/ReviewResponseDto";
 import { ReviewStatus } from "src/review/enum/ReviewStatus";
 import { Review } from "src/review/Review.entity";
 import { ReviewModule } from "src/review/ReviewModule";
@@ -128,5 +129,42 @@ describe('[ReviewController]', () => {
     expect(result.count).toBe(5);
     expect(result.reviews[0].title).toBe('foo9');
     expect(result.reviews[result.count - 1].title).toBe('foo1');
+  });
+
+  it('개별 독서록 조회', async () => {
+    // given
+    const savedReview = await reviewRepository.save(Review.from(
+      "foo",
+      user,
+      book,
+      1,
+      ReviewStatus.PUBLIC,
+      "bar",
+    ));
+
+    // when
+    const result: ReviewResponseDto = await reviewRepository.findByReviewId(savedReview.id);
+
+    // then
+    expect(result.id).toBe(savedReview.id);
+    expect(result.title).toBe('foo');
+  });
+
+  it('개별 독서록 조회 - 존재하지 않는 독서록 조회', async () => {
+    // given
+    const savedReview = await reviewRepository.save(Review.from(
+      "foo",
+      user,
+      book,
+      1,
+      ReviewStatus.PUBLIC,
+      "bar",
+    ));
+    const id = savedReview.id + 99999;
+
+    // expected
+    await expect(async () => {
+      await reviewRepository.findByReviewId(savedReview.id + 99999);
+    }).rejects.toThrow(new NotFoundException(`Review with id ${savedReview.id + 99999} not found`));
   });
 });

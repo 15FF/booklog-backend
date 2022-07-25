@@ -6,10 +6,10 @@ import { User } from 'src/auth/User.entity';
 import { BookSaveDto } from './dto/BookSaveDto';
 import { ReviewListResponseDto } from './dto/ReviewListResponseDto';
 import { ReviewRequestDto } from './dto/ReviewRequestDto';
+import { ReviewResponseDto } from './dto/ReviewResponseDto';
 import { ReviewSaveDto } from './dto/ReviewSaveDto';
 import { ReviewSaveRequestDto } from './dto/ReviewSaveRequestDto';
 import { ReviewUpdateRequestDto } from './dto/ReviewUpdateRequestDto';
-import { Review } from './Review.entity';
 import { ReviewService } from './ReviewService';
 
 @ApiTags('Review')
@@ -61,7 +61,7 @@ export class ReviewController {
 
   @Get('/:id')
   @ApiCreatedResponse({ description: '개별 독서록 조회' })
-  findOneReview(@Param('id', ParseIntPipe) id: number): Promise<Review> {
+  findOneReview(@Param('id', ParseIntPipe) id: number): Promise<ReviewResponseDto> {
     return this.reviewService.findOneReview(id);
   }
 }
