@@ -1,3 +1,4 @@
+import { NotFoundException } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
 import { User } from "src/auth/User.entity";
 import { Book } from "src/book/Book.entity";
@@ -56,5 +57,28 @@ export class ReviewRepository extends Repository<Review> {
       .offset(param.getOffset())
       .getRawMany();
     return new ReviewListResponseDto(plainToInstance(ReviewResponseDto, reviews));
+  }
+
+  async findByReviewId(reviewId: number): Promise<ReviewResponseDto> {
+    const review = await this.createQueryBuilder()
+      .leftJoinAndSelect(User, "user", "user.id = user_id")
+      .leftJoinAndSelect(Book, "book", "book.id = book_id")
+      .select([
+        "review.id AS id",
+        "review.title AS title",
+        "review.rating AS rating",
+        "review.description AS description",
+        "user.username AS username",
+        "book.title AS bookTitle",
+        "book.image AS bookImage",
+        "book.author AS bookAuthor",
+        "book.publisher AS bookPublisher",
+      ])
+      .where("review.id = :id", { id: reviewId })
+      .getRawOne();
+    if (!review) {
+      throw new NotFoundException(`Review with id ${reviewId} not found`);
+    }
+    return plainToInstance(ReviewResponseDto, review);
   }
 }

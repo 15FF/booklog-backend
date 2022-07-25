@@ -5,9 +5,9 @@ import { BookRepository } from 'src/book/BookRepository';
 import { BookSaveDto } from './dto/BookSaveDto';
 import { ReviewListResponseDto } from './dto/ReviewListResponseDto';
 import { ReviewRequestDto } from './dto/ReviewRequestDto';
+import { ReviewResponseDto } from './dto/ReviewResponseDto';
 import { ReviewSaveDto } from './dto/ReviewSaveDto';
 import { ReviewUpdateRequestDto } from './dto/ReviewUpdateRequestDto';
-import { Review } from './Review.entity';
 import { ReviewRepository } from './ReviewRepository';
 
 @Injectable()
@@ -46,7 +46,7 @@ export class ReviewService {
     return this.reviewRepository.findByReviewRequestDto(reviewRequestDto);
   }
 
-  async findOneReview(id: number): Promise<Review> {
-    return this.reviewRepository.findOneBy({ id });
+  async findOneReview(id: number): Promise<ReviewResponseDto> {
+    return this.reviewRepository.findByReviewId(id);
   }
 }
