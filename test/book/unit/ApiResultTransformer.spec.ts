@@ -13,31 +13,28 @@ describe('[ApiResultTransformer]', () => {
       "display": 2,
       "items": [
         {
-          "title": "<b>greeng00se 단편선<\/b>",
+          "title": "greeng00se 단편선",
           "image": "https:\/\/fake.example.com\/asdf\/123\/456\/12345678.jpg?type=m1&udate=amavvdko",
-          "author": "<b>qilip<\/b>",
-          "price": "100000000",
-          "discount": "9000000",
+          "author": "qilip",
           "publisher": "곤운",
           "pubdate": "2016", // 연도 4자리만 들어오는 케이스가 존재
-          "isbn": "1234567890 9791141844822",
+          "isbn": "9791141844822",
         },
         {
-          "title": "<b>qilip 단편선<\/b>",
+          "title": "qilip 단편선",
           "image": "https:\/\/fake.example.com\/asdf\/123\/456\/12345678.jpg?type=m1&udate=fdsaf",
-          "author": "<b>qilip<\/b>",
-          "price": "vcmxlzvm",
+          "author": "qilip^greeng00se",
           "discount": "9000000",
           "publisher": "곤운",
           "pubdate": "20191212",
-          "isbn": "1234567890 9791141844821",
+          "isbn": "9791141844821",
         }
       ]
     };
 
     const bookInfoDtos: BookInfoDto[] = [
       new BookInfoDto(
-        'greeng00se 단편선', 
+        'greeng00se 단편선',
         'https:\/\/fake.example.com\/asdf\/123\/456\/12345678.jpg?type=m1&udate=amavvdko',
         'qilip',
         '곤운',
@@ -47,7 +44,7 @@ describe('[ApiResultTransformer]', () => {
       new BookInfoDto(
         'qilip 단편선',
         'https:\/\/fake.example.com\/asdf\/123\/456\/12345678.jpg?type=m1&udate=fdsaf',
-        'qilip',
+        'qilip, greeng00se',
         '곤운',
         LocalDate.of(2019, 12, 12),
         '9791141844821'
@@ -56,7 +53,7 @@ describe('[ApiResultTransformer]', () => {
 
     // when
     const convertResult: BookInfoDto[] = apiResultCoverter.toBookInfoDtos(naverSearchApiResult);
-    
+
     // then
     expect(convertResult).toStrictEqual(bookInfoDtos);
   });

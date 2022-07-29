@@ -16,14 +16,13 @@ describe('BookController (e2e)', () => {
     "display": 1,
     "items": [
       {
-        "title": "<b>큐피와 그린구스<\/b>의 모험",
+        "title": "큐피와 그린구스의 모험",
         "image": "https:\/\/fake.example.com\/asdf\/123\/456\/12345678.jpg?type=m1&udate=amavvdko",
-        "author": "<b>greeng00se<\/b>",
-        "price": "100000000",
+        "author": "greeng00se",
         "discount": "9000000",
         "publisher": "곤운인쇄소",
         "pubdate": "2010",
-        "isbn": "1234567890 9791141844822",
+        "isbn": "9791141844822",
       },
     ],
   };
