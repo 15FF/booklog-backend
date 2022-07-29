@@ -12,7 +12,7 @@ describe('BookController', () => {
     // given
     const bookInfoDtos: BookInfoDto[] = [
       new BookInfoDto(
-        'greeng00se 단편선', 
+        'greeng00se 단편선',
         'https:\/\/fake.example.com\/asdf\/123\/456\/12345678.jpg?type=m1&udate=amavvdko',
         'qilip',
         '곤운',
