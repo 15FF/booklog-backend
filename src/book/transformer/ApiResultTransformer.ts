@@ -14,8 +14,8 @@ export class ApiResultTransformer {
       new BookInfoDto(
         bookInfo.title.replace(this.REGEXP, ''),
         bookInfo.image,
-        // API의 author 반환 값이 공동저자인 경우 '|' 로 구분하는 것을 ', ' 로 구분하도록 변경
-        bookInfo.author.replace(this.REGEXP, '').replaceAll('|', ', '),
+        // API의 author 반환 값이 공동저자인 경우 '|' 또는 '^' 로 구분하는 것을 ', ' 로 구분하도록 변경
+        bookInfo.author.replace(this.REGEXP, '').replaceAll(/[\|\^]/g, ', '),
         bookInfo.publisher.replace(this.REGEXP, ''),
         this.stringToLocalDate(bookInfo.pubdate),
         // API의 ISBN 반환값이 '<구ISBN> <신ISBN>' 형식이므로 신ISBN 13자리만 추출하여 사용
