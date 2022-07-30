@@ -29,7 +29,7 @@ export class Review extends BaseTimeEntity {
   @Column()
   status: ReviewStatus;
 
-  @Column()
+  @Column("text")
   description: string;
 
   static from(title: string, user: User, book: Book, rating: number, status: ReviewStatus, description: string): Review {
