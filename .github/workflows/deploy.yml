@@ -16,6 +16,11 @@ jobs:
         with:
           node-version: 16
 
+      - name: set env file
+        run: |
+          touch .env
+          echo SSL_CERT=${{ secrets.SSL_CERT }} >> .env
+
       - name: npm install & build
         run: |
           npm install
