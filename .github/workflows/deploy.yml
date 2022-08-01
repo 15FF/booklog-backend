@@ -16,14 +16,6 @@ jobs:
         with:
           node-version: 16
 
-      - name: set env file
-        uses: SpicyPizza/create-envfile@v1.3
-        with:
-          envkey_DEBUG: false
-          envkey_SSL_CERT: ${{ secrets.SSL_CERT }}
-          file_name: .env
-          fail_on_empty: false
-
       - name: npm install & build
         run: |
           npm install
