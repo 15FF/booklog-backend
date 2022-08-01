@@ -1,5 +1,6 @@
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
+import { AuthModule } from 'src/auth/AuthModule';
 import { TypeOrmExModule } from 'src/db/TypeOrmExModule';
 import { BookController } from './BookController';
 import { BookRepository } from './BookRepository';
@@ -10,7 +11,8 @@ import { ApiResultTransformer } from './transformer/ApiResultTransformer';
 @Module({
   imports: [
     TypeOrmExModule.forCustomRepository([BookRepository]),
-    HttpModule
+    HttpModule,
+    AuthModule
   ],
   controllers: [BookController],
   providers: [BookService, BookSearchService, ApiResultTransformer]
